@@ -13,6 +13,6 @@ namespace Capstone.Models
         public string Name {get; set; }
         public int Open_From_mm {get; set; }
         public int Open_To_mm {get; set; }
-        public decimal Daly_Fee {get; set; }
+        public decimal Daily_Fee {get; set; }
     }
 }

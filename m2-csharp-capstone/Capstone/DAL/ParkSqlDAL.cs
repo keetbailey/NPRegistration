@@ -12,7 +12,7 @@ namespace Capstone.DAL
     {
         //InstanceVariables
         private string connectionString = "";
-        private const string SQL_ListAllLang = "SELECT * FROM park ORDER BY name";
+        private const string SQL_ListAllParks = "SELECT * FROM park ORDER BY name";
 
         //constructor
         public ParkSqlDAL()
@@ -30,7 +30,7 @@ namespace Capstone.DAL
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(SQL_ListAllLang, conn);
+                    SqlCommand cmd = new SqlCommand(SQL_ListAllParks, conn);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
