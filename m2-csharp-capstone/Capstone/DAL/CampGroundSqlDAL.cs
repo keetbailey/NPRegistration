@@ -8,22 +8,22 @@ using System.Data.SqlClient;
 
 namespace Capstone.DAL
 {
-    class CampGroundSqlDAL
+    public class CampGroundSqlDAL
     {
         //InstanceVariables
         private string connectionString = "";
         private const string SQL_Campground = "SELECT * FROM campground ORDER BY campground_id";
 
         //constructor
-        public CampGroundSqlDAL()
+        public CampGroundSqlDAL(string connectionString)
         {
-            connectionString = Properties.Settings.Default.ConnectionString;
+            this.connectionString = connectionString;
         }
 
         //Methods
-        public List<CampGround> ListCampground()
+        public Dictionary<int, CampGround> ListCampground()
         {
-            List<CampGround> output = new List<CampGround>();
+            Dictionary<int, CampGround> output = new Dictionary<int, CampGround>();
 
             try
             {
@@ -36,6 +36,8 @@ namespace Capstone.DAL
 
                     while (reader.Read())
                     {
+                        int key = Convert.ToInt32(reader["campground_id"]);
+
                         CampGround campground = new CampGround
                         {
                             Campground_Id = Convert.ToInt32(reader["campground_id"]),
@@ -47,8 +49,7 @@ namespace Capstone.DAL
 
 
                         };
-
-                        output.Add(campground);
+                        output[key] = campground;
                     }
                 }
             }

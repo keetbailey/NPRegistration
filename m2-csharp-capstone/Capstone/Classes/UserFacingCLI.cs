@@ -27,8 +27,7 @@ namespace Capstone.Classes
         {
             ParkSqlDAL parkSqlDAL = new ParkSqlDAL(connectionString);
             Dictionary<int, Park> parkList = new Dictionary<int, Park>();
-
-            while (true)
+            while (true)//parks
             {
                 parkList = parkSqlDAL.ListAllParks();
                 Console.WriteLine("Please select a park to view details: ");
@@ -37,9 +36,43 @@ namespace Capstone.Classes
                 string command = Console.ReadLine();
                 int intcommand = 0;
 
-                if (int.TryParse(command, out intcommand) && parkList.ContainsKey(intcommand) )
+                if (int.TryParse(command, out intcommand) && parkList.ContainsKey(intcommand))
                 {
-                    PrintParkInformation(parkList[intcommand]);
+                    bool done = false;
+                    while (!done)
+                    {
+                        int intcommandCampground = 0;
+
+                        PrintParkInformation(parkList[intcommand]);
+                        Console.WriteLine();
+                        Console.WriteLine("Select a Commmand");
+                        Console.WriteLine("\t1) View Campgrounds");
+                        Console.WriteLine("\t2) Search For Reservation");
+                        Console.WriteLine("\t3) Return to Previous Menu");
+                        command = Console.ReadLine();
+
+                        if (int.TryParse(command, out intcommandCampground) && intcommandCampground == 1)//campground
+                        {
+                            CampGroundSqlDAL campGroundSql = new CampGroundSqlDAL(connectionString);
+                            Dictionary<int, CampGround> CampGround = new Dictionary<int, CampGround>();
+
+                            Console.WriteLine(parkList[intcommand].Name);
+                            Console.ReadLine();
+                            ViewCampgrounds(CampGround);
+                        }
+                        else if (int.TryParse(command, out intcommandCampground) && intcommandCampground == 2)//reservation
+                        {
+                            SearchReservation();
+                        }
+                        else if (int.TryParse(command, out intcommandCampground) && intcommandCampground == 3)//return
+                        {
+                            done = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("please make a valid selection");
+                        }
+                    }
 
                 }
                 else if (command.ToLower() == "q")
@@ -74,14 +107,12 @@ namespace Capstone.Classes
             Console.WriteLine(park.Description);
         }
 
-        private void ParkInfoCommand()
+        public void ViewCampgrounds(Dictionary<int, CampGround> campgrounds)
         {
-
-        }
-
-        private void ViewCampgrouds()
-        {
-
+            foreach (KeyValuePair<int, CampGround> campground in campgrounds)
+            {
+                Console.WriteLine("#{0} {1} {2} {3} {4:C}", campground.Key, campground.Value.Name, campground.Value.Open_From_mm, campground.Value.Open_To_mm, campground.Value.Daily_Fee);
+            }
         }
 
         private void SearchReservation()
