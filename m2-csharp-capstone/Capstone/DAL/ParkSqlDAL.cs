@@ -14,16 +14,19 @@ namespace Capstone.DAL
         private string connectionString = "";
         private const string SQL_ListAllParks = "SELECT * FROM park ORDER BY name";
 
+        //Properties
+        public int ParkCount { get; set; }
+
         //constructor
-        public ParkSqlDAL()
+        public ParkSqlDAL(string connectionString)
         {
-            connectionString = Properties.Settings.Default.ConnectionString;
+            this.connectionString = connectionString;
         }
 
         //Methods
-        public List<Park> ListAllParks()
+        public Dictionary<int, Park> ListAllParks()
         {
-            List<Park> output = new List<Park>();
+            Dictionary<int, Park> output = new Dictionary<int, Park>();
 
             try
             {
@@ -36,18 +39,20 @@ namespace Capstone.DAL
 
                     while(reader.Read())
                     {
+                        int key = Convert.ToInt32(reader["park_id"]);
+
                         Park park = new Park
                         {
-                            Park_Id = Convert.ToInt32(reader["park_id"]),
+                            //Park_Id = Convert.ToInt32(reader["park_id"]),
                             Name = Convert.ToString(reader["name"]),
-                            Establish_Date = Convert.ToDateTime(reader["date_established"]),
+                            Establish_Date = Convert.ToDateTime(reader["establish_date"]),
                             Location = Convert.ToString(reader["location"]),
                             Area = Convert.ToInt32(reader["area"]),
                             Visitors = Convert.ToInt32(reader["visitors"]),
                             Description = Convert.ToString(reader["description"])
                         };
 
-                        output.Add(park);
+                        output[key] = park;
                     }
                 }
             }
@@ -56,6 +61,10 @@ namespace Capstone.DAL
                 throw;
             }
             return output;
+        }
+        public int ParkChoice()
+        {
+            return 0;
         }
     }
 }

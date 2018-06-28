@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Capstone.Classes;
 
 namespace Capstone
 {
@@ -15,6 +16,8 @@ namespace Capstone
             // App.Config file
             // Use this so that you don't need to copy your connection string all over your code!
             string connectionString = ConfigurationManager.ConnectionStrings["CapstoneDatabase"].ConnectionString;
+            UserFacingCLI cli = new UserFacingCLI();
+            cli.RunCLI();
 
             // Main should only have a few lines of code
 
