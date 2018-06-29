@@ -108,7 +108,7 @@ namespace Capstone.Classes
                                 Console.Write("What is the departure date(dd/mm/yyyy)?");
                                 reservationRange[1] = DateTime.Parse(Console.ReadLine());
 
-                                SearchReservation(reservationRange);
+                                SearchReservation(reservationRange, intParkSelection);
                             }
                             else if (int.TryParse(campgroundSelection, out intcampgroundSelection) && intcampgroundSelection == 0)
                             {
@@ -119,9 +119,6 @@ namespace Capstone.Classes
                             {
                                 Console.WriteLine("please make a valid selection");
                             }
-
-
-                            SearchReservation();
                         }
                         else if (int.TryParse(choice, out intChoice) && intChoice == 3)//return
                         {
