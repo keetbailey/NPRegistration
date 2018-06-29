@@ -13,7 +13,7 @@ namespace Capstone.DAL
     {
         //InstanceVariables
         private string connectionString = "";
-        private const string SQL_ListCampSite = "SELECT * FROM site ORDER BY site_id";
+        private const string SQL_CampSite = "SELECT * FROM site ORDER BY site_id";
 
         //constructor
         public CampSiteSqlDAL()
@@ -22,24 +22,25 @@ namespace Capstone.DAL
         }
 
         //Methods
-        public List<CampSite> ListCampSites()
+        public Dictionary<int, CampSite> ListCampSites()
         {
-            List<CampSite> output = new List<CampSite>();
+            Dictionary<int, CampSite> output = new Dictionary<int, CampSite>();
 
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(SQL_ListCampSite, conn);
+                    SqlCommand cmd = new SqlCommand(SQL_CampSite, conn);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
+                        int key = Convert.ToInt32(reader["site_id"]);
+
                         CampSite site = new CampSite
                         {
-                            Site_Id = Convert.ToInt32(reader["site_id"]),
                             Campground_Id = Convert.ToInt32(reader["campground_id"]),
                             Site_Number = Convert.ToInt32(reader["site_number"]),
                             Max_Occupancy = Convert.ToInt32(reader["max_occupancy"]),
@@ -48,7 +49,7 @@ namespace Capstone.DAL
                             Utilities = Convert.ToBoolean(reader["utilities"])
                         };
 
-                        output.Add(site);
+                        output[key] = site;
                     }
                 }
             }

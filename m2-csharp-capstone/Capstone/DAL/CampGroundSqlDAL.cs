@@ -12,7 +12,12 @@ namespace Capstone.DAL
     {
         //InstanceVariables
         private string connectionString = "";
-        private const string SQL_Campground = "SELECT * FROM campground ORDER BY campground_id";
+        private const string SQL_Campground = 
+            "SELECT c.* " +
+            "FROM campground c " +
+            "JOIN park p ON p.park_id = c.park_id " +
+            "WHERE c.park_id = @ParkId " +
+            "ORDER BY campground_id";
 
         //constructor
         public CampGroundSqlDAL(string connectionString)
@@ -21,8 +26,9 @@ namespace Capstone.DAL
         }
 
         //Methods
-        public Dictionary<int, CampGround> ListCampground()
+        public Dictionary<int, CampGround> ListCampground(int parkSelection)
         {
+
             Dictionary<int, CampGround> output = new Dictionary<int, CampGround>();
 
             try
@@ -32,7 +38,10 @@ namespace Capstone.DAL
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(SQL_Campground, conn);
 
+                    cmd.Parameters.AddWithValue("@ParkId", parkSelection.ToString());
+
                     SqlDataReader reader = cmd.ExecuteReader();
+
 
                     while (reader.Read())
                     {

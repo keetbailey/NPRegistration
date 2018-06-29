@@ -13,7 +13,12 @@ namespace Capstone.DAL
     {
         //InstanceVariables
         private string connectionString = "";
-        private const string SQL_Campground = "SELECT * FROM reservation ORDER BY reservation_id";
+        private const string SQL_Reservation = 
+            "SELECT r.* " +
+            "FROM reservation r " +
+            "JOIN campground cg ON cg.campground_id = " +
+            "WHERE " +
+            "ORDER BY reservation_id";
 
         //constructor
         public ReservationSqlDAL()
@@ -22,32 +27,32 @@ namespace Capstone.DAL
         }
 
         //Methods
-        public List<Reservation> ListCampground()
+        public Dictionary<int, Reservation> ListReservation()
         {
-            List<Reservation> output = new List<Reservation>();
+            Dictionary<int, Reservation> output = new Dictionary<int, Reservation>();
 
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(SQL_Campground, conn);
+                    SqlCommand cmd = new SqlCommand(SQL_Reservation, conn);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
+                        int key = Convert.ToInt32(reader["reservation_id"]);
+
                         Reservation reservation = new Reservation
                         {
-                            Reservation_Id = Convert.ToInt32(reader["reservation_id"]),
                             Site_Id = Convert.ToInt32(reader["site_id"]),
                             Name = Convert.ToString(reader["name"]),
                             From_Date = Convert.ToDateTime(reader["from_date"]),
                             To_Date = Convert.ToDateTime(reader["to_date"]),
                             Create_Date = Convert.ToDateTime(reader["create_date"])
                         };
-
-                        output.Add(reservation);
+                        output[key] = reservation;
                     }
                 }
             }
