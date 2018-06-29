@@ -108,7 +108,7 @@ namespace Capstone.Classes
                                 Console.Write("What is the departure date(dd/mm/yyyy)?");
                                 reservationRange[1] = DateTime.Parse(Console.ReadLine());
 
-                                SearchReservation(reservationRange, intParkSelection);
+                                SearchReservation(reservationRange);
                             }
                             else if (int.TryParse(campgroundSelection, out intcampgroundSelection) && intcampgroundSelection == 0)
                             {
@@ -121,7 +121,7 @@ namespace Capstone.Classes
                             }
 
 
-                     
+                            SearchReservation();
                         }
                         else if (int.TryParse(choice, out intChoice) && intChoice == 3)//return
                         {
@@ -182,17 +182,6 @@ namespace Capstone.Classes
 
         private void SearchReservation(DateTime[] reservationRange, int campgroundSelection)
         {
-            CampSiteSqlDAL campSiteSql = new CampSiteSqlDAL();
-
-            Dictionary<int, CampSite> output = new Dictionary<int, CampSite>();
-
-            output=campSiteSql.ListCampSites(reservationRange, campgroundSelection);
-
-            foreach(KeyValuePair<int, CampSite> site in output)
-            {
-                Console.WriteLine(site.Key.ToString(), site.Value.Max_Occupancy, site.Value.Accessible, site.Value.Max_RV_Length, site.Value.Utilities);//UNDONE - add Cost
-            }
-
 
         }
     }
