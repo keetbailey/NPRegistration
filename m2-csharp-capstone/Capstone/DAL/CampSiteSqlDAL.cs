@@ -14,7 +14,7 @@ namespace Capstone.DAL
         //InstanceVariables
         private string connectionString = "";
         private const string SQL_CampSite =
-            "Select s.site_id " +
+            "Select * " +
             "FROM site s " +
             "WHERE s.campground_id = @campground_id " +
             "AND s.site_id NOT IN " +
@@ -39,11 +39,14 @@ namespace Capstone.DAL
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(SQL_CampSite, conn);
+                    
+
+                    cmd.Parameters.AddWithValue("@requested_start", reservationRange[0]);
+                    cmd.Parameters.AddWithValue("@requested_end", reservationRange[1]);
+                    cmd.Parameters.AddWithValue("@campground_id", campgroundSelection);
+                    
 
                     SqlDataReader reader = cmd.ExecuteReader();
-                    cmd.Parameters.AddWithValue("@campground_id", campgroundSelection.ToString());
-                    cmd.Parameters.AddWithValue("@requested_start", reservationRange[0].ToString());
-                    cmd.Parameters.AddWithValue("@requested_end", reservationRange[1].ToString());
 
                     while (reader.Read())
                     {
