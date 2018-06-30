@@ -20,9 +20,9 @@ namespace Capstone.DAL
             "ORDER BY campground_id";
 
         //constructor
-        public CampGroundSqlDAL(string connectionString)
+        public CampGroundSqlDAL()
         {
-            this.connectionString = connectionString;
+            connectionString = Properties.Settings.Default.ConnectionString;
         }
 
         //Methods

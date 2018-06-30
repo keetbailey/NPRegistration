@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 namespace Capstone.DAL
 {
-    class ParkSqlDAL
+    public class ParkSqlDAL
     {
         //InstanceVariables
         private string connectionString = "";
@@ -18,9 +18,9 @@ namespace Capstone.DAL
         public int ParkCount { get; set; }
 
         //constructor
-        public ParkSqlDAL(string connectionString)
+        public ParkSqlDAL()
         {
-            this.connectionString = connectionString;
+            connectionString = Properties.Settings.Default.ConnectionString;
         }
 
         //Methods

@@ -18,7 +18,7 @@ namespace Capstone.Tests
     public class CampSiteTest
     {
         private TransactionScope tran;
-        CampSiteSqlDAL campSiteSql = new CampSiteSqlDAL();
+        CampSiteSQLDAL campSiteSql = new CampSiteSQLDAL();
         Dictionary<int, CampSite> output = new Dictionary<int, CampSite>();
 
 
@@ -35,7 +35,7 @@ namespace Capstone.Tests
         }
 
         [TestMethod]
-        public void ListCampSites_Test()
+        public void ListCampSites_Test() //checks to ensure dictionary items exist (IsNotNull)
         {
             int campgroundSelection = 1;
             DateTime[] dateTimeTest = new DateTime[2];
