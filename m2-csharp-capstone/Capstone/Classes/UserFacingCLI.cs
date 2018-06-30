@@ -166,6 +166,7 @@ namespace Capstone.Classes
 
         public void PrintCampgrounds(Dictionary<int, CampGround> campgrounds)//UNDONE - format column print, convert mm int to month name
         {
+
             Console.WriteLine("Name Open Closed Daily Fee");
             foreach (KeyValuePair<int, CampGround> campground in campgrounds)
             {
@@ -188,7 +189,12 @@ namespace Capstone.Classes
 
             foreach (KeyValuePair<int, CampSite> site in output)
             {
-                Console.WriteLine(site.Key.ToString(), site.Value.Max_Occupancy, site.Value.Accessible, site.Value.Max_RV_Length, site.Value.Utilities);//UNDONE - add Cost
+                Console.WriteLine("{0} {1} {2} {3} {4}", 
+                    site.Key.ToString(),
+                    site.Value.Max_Occupancy,
+                    site.Value.Accessible,
+                    site.Value.Max_RV_Length,
+                    site.Value.Utilities);//UNDONE - add Cost
             }
         }
     }
