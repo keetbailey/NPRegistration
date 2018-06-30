@@ -100,12 +100,13 @@ namespace Capstone.Classes
 
                             string campgroundSelection = Console.ReadLine();
                             int intcampgroundSelection = 0;
+
                             if (int.TryParse(campgroundSelection, out intcampgroundSelection) && campgrounds.ContainsKey(intcampgroundSelection))
                             {
                                 DateTime[] reservationRange = new DateTime[2];
-                                Console.Write("What is arrival date(dd/mm/yyyy)?");//FIX - date format
+                                Console.Write("What is arrival date(mm/dd/yyyy)?");//FIX - date format
                                 reservationRange[0] = DateTime.Parse(Console.ReadLine());//FIX - date format
-                                Console.Write("What is the departure date(dd/mm/yyyy)?");
+                                Console.Write("What is the departure date(mm/dd/yyyy)?");
                                 reservationRange[1] = DateTime.Parse(Console.ReadLine());
 
                                 SearchReservation(reservationRange, intParkSelection);
@@ -143,7 +144,6 @@ namespace Capstone.Classes
             }
         }
 
-
         public void PrintAllParks(Dictionary<int, Park> parks)
         {
 
@@ -164,7 +164,7 @@ namespace Capstone.Classes
             Console.WriteLine(park.Description);
         }
 
-        public void PrintCampgrounds(Dictionary<int, CampGround> campgrounds)//UNDONE - format column print, convert mm int to month name
+        public void PrintCampgrounds(Dictionary<int, CampGround> campgrounds)//UNDONE - format column print
         {
 
             Console.WriteLine("Name Open Closed Daily Fee");
@@ -173,8 +173,8 @@ namespace Capstone.Classes
                 Console.WriteLine("#{0} {1} {2} {3} {4:C}",
                     campground.Key,
                     campground.Value.Name,
-                    campground.Value.Open_From_mm,//<
-                    campground.Value.Open_To_mm,//<
+                    campground.Value.Open_From_Month,//<
+                    campground.Value.Open_To_Month,//<
                     campground.Value.Daily_Fee);
             }
         }
@@ -193,9 +193,9 @@ namespace Capstone.Classes
                 Console.WriteLine("{0} {1} {2} {3} {4}", 
                     site.Key.ToString(),
                     site.Value.Max_Occupancy,
-                    site.Value.Accessible,
+                    site.Value.AccessibleString,
                     site.Value.Max_RV_Length,
-                    site.Value.Utilities);//UNDONE - add Cost
+                    site.Value.UtilitiesString);//UNDONE - add Cost
             }
         }
     }

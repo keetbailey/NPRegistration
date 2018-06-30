@@ -52,12 +52,11 @@ namespace Capstone.DAL
                             Campground_Id = Convert.ToInt32(reader["campground_id"]),
                             Park_Id = Convert.ToInt32(reader["park_id"]),
                             Name = Convert.ToString(reader["name"]),
-                            Open_From_mm = Convert.ToInt32(reader["open_from_mm"]),
-                            Open_To_mm = Convert.ToInt32(reader["open_to_mm"]),
-                            Daily_Fee = Convert.ToInt32(reader["daily_fee"])
-
-
+                            Daily_Fee = Convert.ToInt32(reader["daily_fee"]),
+                            Open_From_Int = Convert.ToInt32(reader["open_from_mm"]),
+                            Open_To_Int = Convert.ToInt32(reader["open_to_mm"]),
                         };
+
                         output[key] = campground;
                     }
                 }
