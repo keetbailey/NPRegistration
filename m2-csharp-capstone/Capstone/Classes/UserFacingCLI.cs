@@ -13,7 +13,7 @@ namespace Capstone.Classes
     public class UserFacingCLI
     {
         //Instance Variables
-        string connectionString;
+        private string connectionString;
 
 
         //Constructor
@@ -25,7 +25,7 @@ namespace Capstone.Classes
         //Methods
         public void RunCLI()
         {
-            ParkSqlDAL parkSqlDAL = new ParkSqlDAL(connectionString);
+            ParkSqlDAL parkSqlDAL = new ParkSqlDAL();
             Dictionary<int, Park> parkList = new Dictionary<int, Park>();
 
             while (true)//parks
@@ -58,7 +58,7 @@ namespace Capstone.Classes
                         string choice = Console.ReadLine();
                         int intChoice = 0;
 
-                        CampGroundSqlDAL campGroundSql = new CampGroundSqlDAL(connectionString);
+                        CampGroundSqlDAL campGroundSql = new CampGroundSqlDAL();
                         Dictionary<int, CampGround> campgrounds = new Dictionary<int, CampGround>();
 
                         if (int.TryParse(choice, out intChoice) && intChoice == 1)
@@ -103,8 +103,8 @@ namespace Capstone.Classes
                             if (int.TryParse(campgroundSelection, out intcampgroundSelection) && campgrounds.ContainsKey(intcampgroundSelection))
                             {
                                 DateTime[] reservationRange = new DateTime[2];
-                                Console.Write("What is arrival date(dd/mm/yyyy)?");
-                                reservationRange[0] = DateTime.Parse(Console.ReadLine());
+                                Console.Write("What is arrival date(dd/mm/yyyy)?");//FIX - date format
+                                reservationRange[0] = DateTime.Parse(Console.ReadLine());//FIX - date format
                                 Console.Write("What is the departure date(dd/mm/yyyy)?");
                                 reservationRange[1] = DateTime.Parse(Console.ReadLine());
 
@@ -142,6 +142,7 @@ namespace Capstone.Classes
 
             }
         }
+
 
         public void PrintAllParks(Dictionary<int, Park> parks)
         {
