@@ -181,7 +181,7 @@ namespace Capstone.Classes
 
         private void SearchReservation(DateTime[] reservationRange, int campgroundSelection)
         {
-            CampSiteSqlDAL campSiteSql = new CampSiteSqlDAL();
+            CampSiteSQLDAL campSiteSql = new CampSiteSQLDAL();
 
             Dictionary<int, CampSite> output = new Dictionary<int, CampSite>();
 
@@ -189,6 +189,7 @@ namespace Capstone.Classes
 
             foreach (KeyValuePair<int, CampSite> site in output)
             {
+
                 Console.WriteLine("{0} {1} {2} {3} {4}", 
                     site.Key.ToString(),
                     site.Value.Max_Occupancy,

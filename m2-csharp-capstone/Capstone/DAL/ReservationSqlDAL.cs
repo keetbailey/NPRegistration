@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace Capstone.DAL
 {
-    class ReservationSqlDAL
+    public class ReservationSqlDAL
     {
         //InstanceVariables
         private string connectionString = "";

@@ -23,7 +23,6 @@ namespace Capstone.DAL
         public CampGroundSqlDAL()
         {
             connectionString = Properties.Settings.Default.ConnectionString;
-
         }
 
         //Methods

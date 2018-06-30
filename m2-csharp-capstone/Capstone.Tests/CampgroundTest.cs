@@ -1,14 +1,46 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Capstone.DAL;
+using Capstone.Models;
+using Capstone.Classes;
+using System.Configuration;
+using System.Transactions;
+using System.Data.SqlClient;
 
 namespace Capstone.Tests
 {
     [TestClass]
     public class CampgroundTest
     {
-        [TestMethod]
-        public void TestMethod1()
+        private TransactionScope tran;
+        CampGroundSqlDAL campGroundSql = new CampGroundSqlDAL();
+        Dictionary<int, CampGround> output = new Dictionary<int, CampGround>();
+
+
+        [TestInitialize]
+        public void initialize()
         {
+            tran = new TransactionScope();
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            tran.Dispose();
+        }
+
+        [TestMethod]
+        public void ListCampGrounds_Test()
+        {
+            int parkSelection = 1;
+
+            output = campGroundSql.ListCampground(parkSelection);
+            Assert.IsNotNull(output);
+
         }
     }
 }
