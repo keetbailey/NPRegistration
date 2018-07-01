@@ -95,7 +95,10 @@ namespace Capstone.Classes
                             {
 
                                 DateTime[] reservationRange = ReservationDates();
+<<<<<<< HEAD
+=======
 
+>>>>>>> ee695bebe55fe098b1a4d5fdfa383e2a4cc37843
 
                                 decimal dailyFee = campgrounds[intcampgroundSelection].Daily_Fee;
 
@@ -238,7 +241,10 @@ namespace Capstone.Classes
 
             foreach (KeyValuePair<int, CampSite> site in campsites)
             {
+<<<<<<< HEAD
+=======
 
+>>>>>>> ee695bebe55fe098b1a4d5fdfa383e2a4cc37843
                 Console.WriteLine(" {0, -7}| {1, -9}| {2, -10}| {3, -12}| {4, -8}| {5, -3:C}",
 
                     site.Key.ToString(),
