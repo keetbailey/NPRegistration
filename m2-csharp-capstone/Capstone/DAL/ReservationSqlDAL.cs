@@ -22,10 +22,11 @@ namespace Capstone.DAL
             "INSERT INTO reservation" +
             "(site_id, name, from_date, to_date, create_date)" +
             "VALUES (@site_id, @name, @from_date, @to_date, @create_date)";
-        private const string SQLNewReservationReturn =
-            "SELECT * " +
-            "FROM reservation" +
-            "WHERE ";
+        private const string SQL_ReturnLastReservation =
+            "SELECT TOP 1 *" +
+            "FROM reservation " +
+            "ORDER BY reservation_id DESC";
+
 
 
         //constructor
@@ -53,7 +54,9 @@ namespace Capstone.DAL
                     cmd.Parameters.AddWithValue("@to_date", reservationRange[1]);
                     cmd.Parameters.AddWithValue("@create_date", DateTime.Now);
 
-                    cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery(); //CODE REVIEW QUESTION - why does execute non-query followed by reader write to table twice 
+
+                    cmd = new SqlCommand(SQL_ReturnLastReservation, conn);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
