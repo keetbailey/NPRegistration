@@ -93,7 +93,7 @@ namespace Capstone.Classes
 
                             if (int.TryParse(campgroundSelection, out int intcampgroundSelection) && campgrounds.ContainsKey(intcampgroundSelection))
                             {
-                                DateTime[] reservationRange = new DateTime[2];
+                                DateTime[] reservationRange = new DateTime[2];//UNDONE I want to move this to a method
                                 Console.Write("What is arrival date(mm/dd/yyyy)?");//FIX - date format, unhandled exception here if inrecognized string
                                 reservationRange[0] = DateTime.Parse(Console.ReadLine());//FIX - date format
                                 Console.Write("What is the departure date(mm/dd/yyyy)?");
@@ -125,7 +125,6 @@ namespace Capstone.Classes
                             Console.WriteLine("please make a valid selection");
                         }
                     }
-
                 }
                 else if (command.ToLower() == "q")
                 {
@@ -136,7 +135,6 @@ namespace Capstone.Classes
                     Console.Clear();
                     Console.WriteLine("please make a valid selection");
                 }
-
             }
         }
 
@@ -220,6 +218,8 @@ namespace Capstone.Classes
 
         public void PrintAvailableCampsites(Dictionary<int, CampSite> campsites, DateTime[] reservationRange, decimal dailyFee)//UNDONE - added input args to print the resrvation fee
         {
+            TimeSpan ts = reservationRange[1] - reservationRange[0];
+            decimal cost = (decimal)ts.TotalDays * dailyFee;
 
             Console.Clear();
             List<string> header = new List<string>
