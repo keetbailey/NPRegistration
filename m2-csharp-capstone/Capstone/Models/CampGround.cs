@@ -8,100 +8,115 @@ namespace Capstone.Models
 {
     public class CampGround
     {
+
         public int Campground_Id { get; set; }
         public int Park_Id { get; set; }
         public string Name { get; set; }
         public int Open_From_Int { get; set; }
         public int Open_To_Int { get; set; }
         public decimal Daily_Fee { get; set; }
-        public string Open_From_Month { get; set; }
-        public string Open_To_Month { get; set; }
-
-        public void FromMonthParse()
+        public string Open_From_Month
         {
-            int monthInt = Open_From_Int;
-            switch (monthInt)
+            get
             {
-                case 1:
-                    Open_From_Month = "January";
-                    break;
-                case 2:
-                    Open_From_Month = "February";
-                    break;
-                case 3:
-                    Open_From_Month = "March";
-                    break;
-                case 4:
-                    Open_From_Month = "April";
-                    break;
-                case 5:
-                    Open_From_Month = "May";
-                    break;
-                case 6:
-                    Open_From_Month = "June";
-                    break;
-                case 7:
-                    Open_From_Month = "July";
-                    break;
-                case 8:
-                    Open_From_Month = "August";
-                    break;
-                case 9:
-                    Open_From_Month = "September";
-                    break;
-                case 10:
-                    Open_From_Month = "October";
-                    break;
-                case 11:
-                    Open_From_Month = "November";
-                    break;
-                case 12:
-                    Open_From_Month = "December";
-                    break;
+                return FromMonthParse(Open_From_Int);
             }
         }
-        public void ToMonthParse()
+        public string Open_To_Month
         {
-            int monthInt = Open_To_Int;
-            switch (monthInt)
+            get
+            {
+                return ToMonthParse(Open_To_Int);
+            }
+        }
+
+        private string FromMonthParse(int open_From_Int)
+        {
+            string output = "";
+            switch (open_From_Int)
             {
                 case 1:
-                    Open_From_Month = "January";
+                    output = "January";
                     break;
                 case 2:
-                    Open_From_Month = "February";
+                    output = "February";
                     break;
                 case 3:
-                    Open_From_Month = "March";
+                    output = "March";
                     break;
                 case 4:
-                    Open_From_Month = "April";
+                    output = "April";
                     break;
                 case 5:
-                    Open_From_Month = "May";
+                    output = "May";
                     break;
                 case 6:
-                    Open_From_Month = "June";
+                    output = "June";
                     break;
                 case 7:
-                    Open_From_Month = "July";
+                    output = "July";
                     break;
                 case 8:
-                    Open_From_Month = "August";
+                    output = "August";
                     break;
                 case 9:
-                    Open_From_Month = "September";
+                    output = "September";
                     break;
                 case 10:
-                    Open_From_Month = "October";
+                    output = "October";
                     break;
                 case 11:
-                    Open_From_Month = "November";
+                    output = "November";
                     break;
                 case 12:
-                    Open_From_Month = "December";
+                    output = "December";
                     break;
             }
+            return output;
+        }
+        private string ToMonthParse(int Open_To_Int)
+        {
+            string output = "";
+            switch (Open_To_Int)
+            {
+                case 1:
+                    output = "January";
+                    break;
+                case 2:
+                    output = "February";
+                    break;
+                case 3:
+                    output = "March";
+                    break;
+                case 4:
+                    output = "April";
+                    break;
+                case 5:
+                    output = "May";
+                    break;
+                case 6:
+                    output = "June";
+                    break;
+                case 7:
+                    output = "July";
+                    break;
+                case 8:
+                    output = "August";
+                    break;
+                case 9:
+                    output = "September";
+                    break;
+                case 10:
+                    output = "October";
+                    break;
+                case 11:
+                    output = "November";
+                    break;
+                case 12:
+                    output = "December";
+                    break;
+            }
+            return output;
         }
     }
 }

@@ -8,33 +8,40 @@ namespace Capstone.Models
 {
     public class CampSite
     {
-        public int Site_Id  { get; set; }
-        public int Campground_Id  { get; set; }
-        public int Site_Number  { get; set; }
+        public int Site_Id { get; set; }
+        public int Campground_Id { get; set; }
+        public int Site_Number { get; set; }
         public int Max_Occupancy { get; set; }
         public bool AccessibleBool { get; set; }
-        public string AccessibleString { get; set; }
         public int Max_RV_Length { get; set; }
         public bool UtilitiesBool { get; set; }
-        public string UtilitiesString { get; set; }
-
-        public void AccessibleParse()
+        public string AccessibleString
         {
-            bool accessible = AccessibleBool;
-            if (accessible)
+            get
             {
-                AccessibleString = "Yes";
+                if (AccessibleBool)
+                {
+                    return "Yes";
+                }
+                else
+                {
+                    return "No";
+                };
             }
-            AccessibleString = "No";
         }
-        public void UtilitiesParse()
+        public string UtilitiesString
         {
-            bool utilities = UtilitiesBool;
-            if (utilities)
+            get
             {
-                UtilitiesString = "Yes";
+                if (UtilitiesBool)
+                {
+                    return "Yes";
+                }
+                else
+                {
+                    return "N/A";
+                };
             }
-            UtilitiesString = "N/A";
         }
     }
 }
