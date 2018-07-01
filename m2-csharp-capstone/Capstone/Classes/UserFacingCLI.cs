@@ -93,6 +93,8 @@ namespace Capstone.Classes
 
                             if (int.TryParse(campgroundSelection, out int intcampgroundSelection) && campgrounds.ContainsKey(intcampgroundSelection))
                             {
+
+
                                 DateTime[] reservationRange = new DateTime[2];//UNDONE I want to move this to a method
                                 Console.Write("What is arrival date(mm/dd/yyyy)?");//FIX - date format, unhandled exception here if inrecognized string
                                 reservationRange[0] = DateTime.Parse(Console.ReadLine());//FIX - date format
@@ -236,7 +238,7 @@ namespace Capstone.Classes
 
             foreach (KeyValuePair<int, CampSite> site in campsites)
             {
-                Console.WriteLine(" {0, -7}| {1, -9}| {2, -10}| {3, -13}| {4, -3}",
+                Console.WriteLine(" {0, -7}| {1, -9}| {2, -10}| {3, -13}| {4, -2}",
                     site.Key.ToString(),
                     site.Value.Max_Occupancy,
                     site.Value.AccessibleString,

@@ -19,65 +19,21 @@ namespace Capstone.Models
         {
             get
             {
-                return FromMonthParse(Open_From_Int);
+                return MonthParse(Open_From_Int);
             }
         }
         public string Open_To_Month
         {
             get
             {
-                return ToMonthParse(Open_To_Int);
+                return MonthParse(Open_To_Int);
             }
         }
 
-        private string FromMonthParse(int open_From_Int)
+        private string MonthParse(int open_From_Int)
         {
             string output = "";
             switch (open_From_Int)
-            {
-                case 1:
-                    output = "January";
-                    break;
-                case 2:
-                    output = "February";
-                    break;
-                case 3:
-                    output = "March";
-                    break;
-                case 4:
-                    output = "April";
-                    break;
-                case 5:
-                    output = "May";
-                    break;
-                case 6:
-                    output = "June";
-                    break;
-                case 7:
-                    output = "July";
-                    break;
-                case 8:
-                    output = "August";
-                    break;
-                case 9:
-                    output = "September";
-                    break;
-                case 10:
-                    output = "October";
-                    break;
-                case 11:
-                    output = "November";
-                    break;
-                case 12:
-                    output = "December";
-                    break;
-            }
-            return output;
-        }
-        private string ToMonthParse(int Open_To_Int)
-        {
-            string output = "";
-            switch (Open_To_Int)
             {
                 case 1:
                     output = "January";

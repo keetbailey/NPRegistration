@@ -13,12 +13,20 @@ namespace Capstone.DAL
     {
         //InstanceVariables
         private string connectionString = "";
-        private const string SQL_Reservation = 
+        private const string SQL_Reservation =
             "SELECT r.* " +
             "FROM reservation r " +
-            "JOIN campground cg ON cg.campground_id = " +
-            "WHERE " +
+            "JOIN site s ON s.site_id = r.site_id" +
             "ORDER BY reservation_id";
+        private const string SQL_AddReservation =
+            "INSERT INTO reservation" +
+            "(site_id, name, from_date, to_date, create_date)" +
+            "VALUES (@site_id, @name, @from_date, @to_date, @create_date)";
+        private const string SQLNewReservationReturn =
+            "SELECT * " +
+            "FROM reservation" +
+            "WHERE ";
+
 
         //constructor
         public ReservationSqlDAL()
@@ -27,16 +35,25 @@ namespace Capstone.DAL
         }
 
         //Methods
-        public Dictionary<int, Reservation> ListReservation()
+       
+        public Dictionary<int, Reservation> AddNewReservation(int siteSelection, string reservationName, DateTime[] reservationRange)
         {
             Dictionary<int, Reservation> output = new Dictionary<int, Reservation>();
-
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(SQL_Reservation, conn);
+
+                    SqlCommand cmd = new SqlCommand(SQL_AddReservation, conn);
+
+                    cmd.Parameters.AddWithValue("@site_id", siteSelection);
+                    cmd.Parameters.AddWithValue("@name", reservationName);
+                    cmd.Parameters.AddWithValue("@from_date", reservationRange[0]);
+                    cmd.Parameters.AddWithValue("@to_date", reservationRange[1]);
+                    cmd.Parameters.AddWithValue("@create_date", DateTime.Now);
+
+                    cmd.ExecuteNonQuery();
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
