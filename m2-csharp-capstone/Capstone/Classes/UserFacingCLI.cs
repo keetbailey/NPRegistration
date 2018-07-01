@@ -262,9 +262,14 @@ namespace Capstone.Classes
             return output;
         }
 
-        public void AddNewReservation(int siteSelection, string reservationName, DateTime[] reservationRange)
+        public Dictionary<int, Reservation> AddNewReservation(int siteSelection, string reservationName, DateTime[] reservationRange)
         {
+            ReservationSqlDAL reservationSql = new ReservationSqlDAL();
+            Dictionary<int, Reservation> newReservation = new Dictionary<int, Reservation>();
 
+            newReservation = reservationSql.AddNewReservation(siteSelection, reservationName, reservationRange);
+
+            return newReservation;
         }
 
         public int SiteSelection()
