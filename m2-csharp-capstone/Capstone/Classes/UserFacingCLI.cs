@@ -184,7 +184,7 @@ namespace Capstone.Classes
             return campgrounds;
         }
 
-        public Dictionary<int, CampGround> PrintCampgrounds(Dictionary<int, CampGround> campgrounds)//UNDONE - format column print
+        public void PrintCampgrounds(Dictionary<int, CampGround> campgrounds)//UNDONE - format column print
         {
             List<string> header = new List<string>
             {
@@ -203,7 +203,6 @@ namespace Capstone.Classes
                     campground.Value.Open_To_Month,//<
                     campground.Value.Daily_Fee);
             }
-            return campgrounds;
         }
 
         private Dictionary<int, CampSite> SearchReservation(DateTime[] reservationRange, int campgroundSelection)
