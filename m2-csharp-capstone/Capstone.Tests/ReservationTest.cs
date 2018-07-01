@@ -39,7 +39,7 @@ namespace Capstone.Tests
             Reservation newReservation = new Reservation();
             
 
-            //output = reservationSql.AddNewReservation(1, "Keet Bailey", new DateTime(2018,06,20) ;
+            //output = reservationSql.AddNewReservation(1, "Keet Bailey", new DateTime(2018,06,20);
             Assert.IsNotNull(output);
         }
 
