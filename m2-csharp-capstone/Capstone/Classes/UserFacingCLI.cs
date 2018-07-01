@@ -95,6 +95,10 @@ namespace Capstone.Classes
                             {
 
                                 DateTime[] reservationRange = ReservationDates();
+<<<<<<< HEAD
+=======
+
+>>>>>>> ee695bebe55fe098b1a4d5fdfa383e2a4cc37843
 
                                 decimal dailyFee = campgrounds[intcampgroundSelection].Daily_Fee;
 
@@ -102,6 +106,10 @@ namespace Capstone.Classes
 
                                 PrintAvailableCampsites(campSites, reservationRange, dailyFee);//UNDONE need to continue adding campsite selection here 
                                 Console.ReadLine();
+                                int siteSelection = SiteSelection();
+                                string reservationName = ReservationName();
+                                AddNewReservation(siteSelection, reservationName, reservationRange);
+
                             }
                             else if (int.TryParse(campgroundSelection, out intcampgroundSelection) && intcampgroundSelection == 0)
                             {
@@ -233,6 +241,10 @@ namespace Capstone.Classes
 
             foreach (KeyValuePair<int, CampSite> site in campsites)
             {
+<<<<<<< HEAD
+=======
+
+>>>>>>> ee695bebe55fe098b1a4d5fdfa383e2a4cc37843
                 Console.WriteLine(" {0, -7}| {1, -9}| {2, -10}| {3, -12}| {4, -8}| {5, -3:C}",
 
                     site.Key.ToString(),
@@ -241,7 +253,7 @@ namespace Capstone.Classes
                     site.Value.Max_RV_Length,
                     site.Value.UtilitiesString,
                     cost);//UNDONE - add Cost
-                    
+
             }
         }
 
@@ -252,6 +264,47 @@ namespace Capstone.Classes
             output[0] = DateTime.Parse(Console.ReadLine());//FIX - date format
             Console.Write("What is the departure date(mm/dd/yyyy)?");
             output[1] = DateTime.Parse(Console.ReadLine());
+
+            return output;
+        }
+
+        public Dictionary<int, Reservation> AddNewReservation(int siteSelection, string reservationName, DateTime[] reservationRange)
+        {
+            ReservationSqlDAL reservationSql = new ReservationSqlDAL();
+            Dictionary<int, Reservation> newReservation = new Dictionary<int, Reservation>();
+
+            newReservation = reservationSql.AddNewReservation(siteSelection, reservationName, reservationRange);
+
+            return newReservation;
+        }
+
+        public int SiteSelection()
+        {
+            int output = 0;
+            string siteSelection = "";
+            int intSiteSelection = 0;
+
+            while (!int.TryParse(siteSelection, out intSiteSelection))
+            {
+                Console.Write("Which site should be reserved (enter 0 to cancel)");
+                siteSelection = Console.ReadLine();
+                if (int.TryParse(siteSelection, out intSiteSelection) && intSiteSelection > 0)
+                {
+                    output = intSiteSelection;
+                }
+                else
+                {
+                    Console.Write("Please make a valid selection");
+                }
+
+            }
+            return output;
+        }
+
+        public string ReservationName()
+        {
+            Console.Write("What name should the reservation be made under?");
+            string output = Console.ReadLine();
 
             return output;
         }

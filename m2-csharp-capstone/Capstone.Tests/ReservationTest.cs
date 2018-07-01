@@ -37,8 +37,9 @@ namespace Capstone.Tests
         {
             ReservationSqlDAL reservationSql = new ReservationSqlDAL();
             Reservation newReservation = new Reservation();
+            
 
-            output = reservationSql.ListReservation();
+            //output = reservationSql.AddNewReservation(1, "Keet Bailey", new DateTime(2018,06,20) ;
             Assert.IsNotNull(output);
         }
 
