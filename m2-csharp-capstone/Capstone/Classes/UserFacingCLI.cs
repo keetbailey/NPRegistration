@@ -93,17 +93,9 @@ namespace Capstone.Classes
 
                             if (int.TryParse(campgroundSelection, out int intcampgroundSelection) && campgrounds.ContainsKey(intcampgroundSelection))
                             {
-<<<<<<< HEAD
 
-
-                                DateTime[] reservationRange = new DateTime[2];//UNDONE I want to move this to a method
-                                Console.Write("What is arrival date(mm/dd/yyyy)?");//FIX - date format, unhandled exception here if inrecognized string
-                                reservationRange[0] = DateTime.Parse(Console.ReadLine());//FIX - date format
-                                Console.Write("What is the departure date(mm/dd/yyyy)?");
-                                reservationRange[1] = DateTime.Parse(Console.ReadLine());
-=======
                                 DateTime[] reservationRange = ReservationDates();
->>>>>>> 05e458babb0d6926e7e539627388cd68b2ddca96
+
 
                                 decimal dailyFee = campgrounds[intcampgroundSelection].Daily_Fee;
 
@@ -111,6 +103,10 @@ namespace Capstone.Classes
 
                                 PrintAvailableCampsites(campSites, reservationRange, dailyFee);//UNDONE need to continue adding campsite selection here 
                                 Console.ReadLine();
+                                int siteSelection = SiteSelection();
+                                string reservationName = ReservationName();
+                                AddNewReservation(siteSelection, reservationName, reservationRange);
+
                             }
                             else if (int.TryParse(campgroundSelection, out intcampgroundSelection) && intcampgroundSelection == 0)
                             {
@@ -242,19 +238,16 @@ namespace Capstone.Classes
 
             foreach (KeyValuePair<int, CampSite> site in campsites)
             {
-<<<<<<< HEAD
-                Console.WriteLine(" {0, -7}| {1, -9}| {2, -10}| {3, -13}| {4, -2}",
-=======
+
                 Console.WriteLine(" {0, -7}| {1, -9}| {2, -10}| {3, -12}| {4, -8}| {5, -3:C}",
 
->>>>>>> 05e458babb0d6926e7e539627388cd68b2ddca96
                     site.Key.ToString(),
                     site.Value.Max_Occupancy,
                     site.Value.AccessibleString,
                     site.Value.Max_RV_Length,
                     site.Value.UtilitiesString,
                     cost);//UNDONE - add Cost
-                    
+
             }
         }
 
@@ -265,6 +258,42 @@ namespace Capstone.Classes
             output[0] = DateTime.Parse(Console.ReadLine());//FIX - date format
             Console.Write("What is the departure date(mm/dd/yyyy)?");
             output[1] = DateTime.Parse(Console.ReadLine());
+
+            return output;
+        }
+
+        public void AddNewReservation(int siteSelection, string reservationName, DateTime[] reservationRange)
+        {
+
+        }
+
+        public int SiteSelection()
+        {
+            int output = 0;
+            string siteSelection = "";
+            int intSiteSelection = 0;
+
+            while (!int.TryParse(siteSelection, out intSiteSelection))
+            {
+                Console.Write("Which site should be reserved (enter 0 to cancel)");
+                siteSelection = Console.ReadLine();
+                if (int.TryParse(siteSelection, out intSiteSelection) && intSiteSelection > 0)
+                {
+                    output = intSiteSelection;
+                }
+                else
+                {
+                    Console.Write("Please make a valid selection");
+                }
+
+            }
+            return output;
+        }
+
+        public string ReservationName()
+        {
+            Console.Write("What name should the reservation be made under?");
+            string output = Console.ReadLine();
 
             return output;
         }
