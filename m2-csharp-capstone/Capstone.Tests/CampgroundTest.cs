@@ -43,21 +43,5 @@ namespace Capstone.Tests
 
         }
 
-        [TestMethod]
-        public void VerifyCampGroundMatchesToPark() //verify that if using "Acadia" park, campgrounds for Blackwoods, Seawall and Schoodic Woods populates 
-        {
-            
-            string result = "";
-            string resulttwo = "";
-            string resultthree = "";
-
-            output = campGroundSql.ListCampground(1);
-
-            Assert.AreEqual("Blackwoods", result);
-            Assert.AreEqual("Seawall", resulttwo);
-            Assert.AreEqual("Schoodic Woods", resultthree);
-
-        }
-
     }
 }

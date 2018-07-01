@@ -36,11 +36,9 @@ namespace Capstone.Tests
         public void ViewParkName()  //pulls in valid park name 
         {
             ParkSqlDAL parkSql = new ParkSqlDAL();
-            Park newPark = new Park();
-            newPark.Name = "Arches"; 
 
-            output = parkSql.ListAllParks(); //UNDONE - ListAllParks does not take in parameter - was hoping to do output = parkSql.ListAllParks(newPark.Name);
-            Assert.AreEqual("Arches", newPark.Name.ToString());
+            output = parkSql.ListAllParks(); 
+            CollectionAssert.Contains(output.Values, "Acadia");
         }
 
         [TestMethod]
