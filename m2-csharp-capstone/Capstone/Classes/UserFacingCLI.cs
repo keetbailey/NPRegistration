@@ -105,11 +105,11 @@ namespace Capstone.Classes
                                 campSites = SearchReservation(reservationRange, intParkSelection);
 
                                 PrintAvailableCampsites(campSites, reservationRange, dailyFee);//UNDONE need to continue adding campsite selection here 
-                                Console.ReadLine();
+                                Console.WriteLine();
                                 int siteSelection = SiteSelection();
                                 string reservationName = ReservationName();
-                                AddNewReservation(siteSelection, reservationName, reservationRange);
-
+                                Dictionary<int, Reservation> newReservation = AddNewReservation(siteSelection, reservationName, reservationRange);
+                                ReservationConfirmation(newReservation);
                             }
                             else if (int.TryParse(campgroundSelection, out intcampgroundSelection) && intcampgroundSelection == 0)
                             {
@@ -260,9 +260,9 @@ namespace Capstone.Classes
         public DateTime[] ReservationDates()
         {
             DateTime[] output = new DateTime[2];//UNDONE I want to move this to a method
-            Console.Write("What is arrival date(mm/dd/yyyy)?");//FIX - date format, unhandled exception here if inrecognized string
+            Console.Write("What is arrival date?");//FIX - date format, unhandled exception here if inrecognized string
             output[0] = DateTime.Parse(Console.ReadLine());//FIX - date format
-            Console.Write("What is the departure date(mm/dd/yyyy)?");
+            Console.Write("What is the departure date?");
             output[1] = DateTime.Parse(Console.ReadLine());
 
             return output;
@@ -308,5 +308,17 @@ namespace Capstone.Classes
 
             return output;
         }
+
+        public void ReservationConfirmation(Dictionary<int, Reservation> reservations)
+        {
+            //int reservationId = reservation[0].Reservation_Id;
+            foreach (KeyValuePair<int, Reservation> reservation in reservations)
+            {
+
+                Console.WriteLine("The reservation has been made and the confirmation ID is {0}", reservation.Key);
+            }
+            Console.ReadLine();
+        }
     }
+
 }

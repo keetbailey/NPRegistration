@@ -14,7 +14,7 @@ namespace Capstone.DAL
         //InstanceVariables
         private string connectionString = "";
         private const string SQL_CampSite =
-            "Select * " +
+            "Select TOP 5 * " +
             "FROM site s " +
             "WHERE s.campground_id = @campground_id " +
             "AND s.site_id NOT IN " +
