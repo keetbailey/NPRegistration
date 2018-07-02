@@ -1,0 +1,228 @@
+Park DAL 
+Campground DAL 
+Campsite DAL
+Reservation DAL 
+
+Park Model
+Campground Model
+Campsite Model
+Reseveration Model
+
+
+UserInterface 
+
+ParkInformation
+
+ParkCampgrounds
+
+Search Reservation
+
+-- Reserve Site SQL 
+
+            SELECT r.*
+            FROM reservation r 
+            JOIN site s ON s.site_id = r.site_id
+            ORDER BY reservation_id
+
+			BEGIN TRANSACTION 
+
+			DECLARE @site_id INT = '5'
+			DECLARE @name varchar(60) = 'John Fulton'
+			DECLARE @from_date DATE = '6/20/18'
+			DECLARE @to_date DATE = '6/25/18'
+			DECLARE @create_date DATE = GETDATE()
+
+			INSERT INTO reservation(site_id, name, from_date, to_date, create_date)
+			VALUES (@site_id, @name, @from_date, @to_date, @create_date)
+
+			ROLLBACK TRANSACTION 
+
+
+DECLARE @requested_start DATE = '6/28/2018'
+DECLARE @requested_end DATE = '7/1/2018'
+DECLARE @campground_id INT = '1'
+
+Select s.site_id
+FROM site s
+WHERE s.campground_id = @campground_id 
+AND s.site_id NOT IN (SELECT site_id from reservation WHERE @requested_start < to_date
+AND @requested_end > from_date); 
+
+
+        private void SearchReservation(DateTime[] reservationRange, int campgroundSelection)
+        {
+            CampSiteSqlDAL campSiteSql = new CampSiteSqlDAL();
+
+            Dictionary<int, CampSite> output = new Dictionary<int, CampSite>();
+
+            output=campSiteSql.ListCampSites(reservationRange, campgroundSelection);
+
+            foreach(KeyValuePair<int, CampSite> site in output)
+            {
+                Console.WriteLine(site.Key.ToString(), site.Value.Max_Occupancy, site.Value.Accessible, site.Value.Max_RV_Length, site.Value.Utilities);//UNDONE - add Cost
+            }
+
+Accessible is assignment - utilize if/else with bool, ex. if 
+
+if (Convert.ToBoolean(reader["accessible"])
+{
+accessible = "yes"
+}
+else 
+{
+accessible = "no" 
+}
+
+
+namespace Capstone.Tests
+{
+    [TestClass]
+    public class CampgroundTest
+    {
+        private TransactionScope tran;
+        CampGroundSqlDAL campGroundSql = new CampGroundSqlDAL();
+        Dictionary<int, CampGround> output = new Dictionary<int, CampGround>();
+
+
+        [TestInitialize]
+        public void initialize()
+        {
+            tran = new TransactionScope();
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            tran.Dispose();
+        }
+
+        [TestMethod]
+        public void ListCampGrounds_Test()
+        {
+            int parkSelection = 1;
+
+            output = campGroundSql.ListCampground(parkSelection);
+            Assert.IsNotNull(output);
+
+        }
+    }
+}
+
+
+
+namespace Capstone.Tests
+{
+    [TestClass]
+    public class CampSiteTest
+    {
+        private TransactionScope tran;
+        CampSiteSQLDAL campSiteSql = new CampSiteSQLDAL();
+        Dictionary<int, CampSite> output = new Dictionary<int, CampSite>();
+
+
+        [TestInitialize]
+        public void initialize()
+        {
+            tran = new TransactionScope();
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            tran.Dispose();
+        }
+
+        [TestMethod]
+        public void ListCampSites_Test() //checks to ensure dictionary items exist (IsNotNull)
+        {
+            int campgroundSelection = 1;
+            DateTime[] dateTimeTest = new DateTime[2];
+
+            dateTimeTest[0] = new DateTime(2018, 10, 20);
+            dateTimeTest[1] = new DateTime(2018, 10, 25);
+ 
+            output = campSiteSql.ListCampSites(dateTimeTest, campgroundSelection);
+            Assert.IsNotNull(output);
+
+        }
+    }
+}
+
+
+namespace Capstone.Tests
+{
+    [TestClass]
+    public class ParkSqlTests
+    {
+        private TransactionScope tran;
+        Dictionary<int, Park> output = new Dictionary<int, Park>();
+
+        [TestInitialize]
+        public void initialize()
+        {
+            tran = new TransactionScope();
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            tran.Dispose();
+        }
+
+        [TestMethod] 
+        public void ViewParkName()  //pulls in valid park name 
+        {
+            ParkSqlDAL parkSql = new ParkSqlDAL();
+            Park newPark = new Park();
+            newPark.Name = "Arches"; 
+
+            output = parkSql.ListAllParks(); //UNDONE - ListAllParks does not take in parameter - was hoping to do output = parkSql.ListAllParks(newPark.Name);
+            Assert.AreEqual("Arches", newPark.Name.ToString());
+        }
+
+        [TestMethod]
+        public void ParkList()  //UNDONE - Wanting to ensure contents of parks is available 
+        {
+            ParkSqlDAL parkSql = new ParkSqlDAL();
+
+            output = parkSql.ListAllParks(); 
+            Assert.IsNotNull(output);
+        }
+    }
+}
+
+
+namespace Capstone.Tests
+{
+    [TestClass]
+    public class ReservationTest
+    {
+        private TransactionScope tran;
+        Dictionary<int, Reservation> output = new Dictionary<int, Reservation>();
+
+        [TestInitialize]
+        public void initialize()
+        {
+            tran = new TransactionScope();
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            tran.Dispose();
+        }
+
+        [TestMethod]
+        public void CreateReservationIfAvailable()  // test that the dictionary item exists 
+        {
+            ReservationSqlDAL reservationSql = new ReservationSqlDAL();
+            Reservation newReservation = new Reservation();
+
+            output = reservationSql.ListReservation();
+            Assert.IsNotNull(output);
+        }
+
+    }
+}
+
+

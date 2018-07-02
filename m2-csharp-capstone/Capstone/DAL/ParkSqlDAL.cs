@@ -62,10 +62,5 @@ namespace Capstone.DAL
             }
             return output;
         }
-
-        public Park ParkChoice(int parkChoice)
-        {
-            return null;
-        }
     }
 }

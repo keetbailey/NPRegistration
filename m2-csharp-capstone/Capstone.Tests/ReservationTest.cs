@@ -33,14 +33,14 @@ namespace Capstone.Tests
         }
 
         [TestMethod]
-        public void CreateReservationIfAvailable()  // test that the dictionary item exists 
+        public void CreatedReservation()  // test that the dictionary item exists 
         {
             ReservationSqlDAL reservationSql = new ReservationSqlDAL();
             Reservation newReservation = new Reservation();
-            
 
-            //output = reservationSql.AddNewReservation(1, "Keet Bailey", new DateTime(2018,06,20);
-            Assert.IsNotNull(output);
+
+            //output = reservationSql.AddNewReservation(1, "Keet Bailey", DateTime[](2018, 6, 25, 3, 30, 54);
+            //Assert.IsNotNull(output);
         }
 
     }

@@ -17,8 +17,10 @@ namespace Capstone.Tests
     [TestClass]
     public class ParkSqlTests
     {
-        private TransactionScope tran;
         Dictionary<int, Park> output = new Dictionary<int, Park>();
+        private TransactionScope tran;
+        string connectionString = @"Data Source=DESKTOP-79DH3VU\SQLEXPRESS;Initial Catalog = NationalPark; Integrated Security = True";
+
 
         [TestInitialize]
         public void initialize()
@@ -32,22 +34,16 @@ namespace Capstone.Tests
             tran.Dispose();
         }
 
-        [TestMethod] 
-        public void ViewParkName()  //pulls in valid park name 
-        {
-            ParkSqlDAL parkSql = new ParkSqlDAL();
-
-            output = parkSql.ListAllParks(); 
-           // CollectionAssert.Contains(output.TryGetValue("Acadia"));
-        }
 
         [TestMethod]
-        public void ParkList()  //UNDONE - Wanting to ensure contents of parks is available 
+        public void ParkHasList()  
         {
             ParkSqlDAL parkSql = new ParkSqlDAL();
 
-            output = parkSql.ListAllParks(); 
+            output = parkSql.ListAllParks();
             Assert.IsNotNull(output);
         }
+
+
     }
 }

@@ -17,8 +17,9 @@ namespace Capstone.Tests
     public class CampgroundTest
     {
         private TransactionScope tran;
-        CampGroundSqlDAL campGroundSql = new CampGroundSqlDAL();
+        static CampGroundSqlDAL campGroundSql = new CampGroundSqlDAL();
         Dictionary<int, CampGround> output = new Dictionary<int, CampGround>();
+        string connectionString = @"Data Source=DESKTOP-79DH3VU\SQLEXPRESS;Initial Catalog = NationalPark; Integrated Security = True";
 
 
         [TestInitialize]
