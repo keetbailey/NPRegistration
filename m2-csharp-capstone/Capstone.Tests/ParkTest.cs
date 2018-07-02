@@ -19,7 +19,7 @@ namespace Capstone.Tests
     {
         Dictionary<int, Park> output = new Dictionary<int, Park>();
         private TransactionScope tran;
-        string connectionString = @"Data Source=DESKTOP-79DH3VU\SQLEXPRESS;Initial Catalog = NationalPark; Integrated Security = True";
+        
 
 
         [TestInitialize]

@@ -76,7 +76,7 @@ namespace Capstone.Classes
                             }
                             else if (!int.TryParse(subChoice, out intSubChoice))
                             {
-                                Console.WriteLine("please make a valid selection");
+                                Console.WriteLine("Please make a valid selection");
                             }
                         }
                         if (int.TryParse(choice, out intChoice) && intChoice == 2)// Search reservation
@@ -253,9 +253,9 @@ namespace Capstone.Classes
         public DateTime[] ReservationDates()
         {
             DateTime[] output = new DateTime[2];//UNDONE I want to move this to a method
-            Console.Write("What is arrival date?");//FIX - date format, unhandled exception here if inrecognized string
+            Console.Write("What is arrival date? ");//FIX - date format, unhandled exception here if inrecognized string
             output[0] = DateTime.Parse(Console.ReadLine());//FIX - date format
-            Console.Write("What is the departure date?");
+            Console.Write("What is the departure date? ");
             output[1] = DateTime.Parse(Console.ReadLine());
 
             return output;
@@ -296,7 +296,7 @@ namespace Capstone.Classes
 
         public string ReservationName()
         {
-            Console.Write("What name should the reservation be made under?");
+            Console.Write("What name should the reservation be made under? ");
             string output = Console.ReadLine();
 
             return output;
